@@ -1,0 +1,1 @@
+export const BACKEND_URL="https://blogging_website.dipghosal2002.workers.dev"
