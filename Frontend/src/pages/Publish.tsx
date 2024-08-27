@@ -2,12 +2,36 @@ import { Appbar } from "../components/Appbar"
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { useNavigate } from "react-router-dom";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState ,useEffect } from "react";
+
 
 export const Publish = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    useEffect(() => {
+        // Check if the token exists in localStorage
+        const token = localStorage.getItem("token");
+        if (token) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
+        }
+    }, []);
+    if(!isLoggedIn){
+        return <div>
+            <div className="text-6xl font-bold flex justify-center mt-2">
+                403
+            </div>
+            <div className="h-0.5 bg-black my-4">
+
+            </div>
+            <div className="text-4xl font-semibold flex justify-center">
+                Unauthorized Request
+            </div>
+        </div>
+    }
 
     return <div>
         <Appbar />
